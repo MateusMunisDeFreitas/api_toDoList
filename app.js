@@ -1,12 +1,14 @@
 import express from 'express';
 import dotenv from 'dotenv';
 import index from './routers/index.js'
+import tabelas from './dataBase/tabelas.js';
 
 //const PORT = 3000;
 dotenv.config();
 const app = express();
 
 app.use(express.json());
+tabelas.init();
 index(app);
 
 app.get('/',(req, res)=>{
