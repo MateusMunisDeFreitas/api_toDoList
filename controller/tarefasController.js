@@ -1,7 +1,6 @@
-import { use } from 'react';
 import TarefasModel from '../model/tarefasModel.js';
 
-const tarefas = TarefasModel;
+const tarefas = TarefasModel; 
 
 class TarefasController{
     async get(req, res){
@@ -17,8 +16,8 @@ class TarefasController{
     async post(req, res){
         try{
             const {descricao, user_id} = req.body;
-            const response = await tarefas.post({"descricao":descricao, "user_id":user_id});
-            res.status(201).json(response);
+            const response = await tarefas.post({descricao:descricao, user_id:user_id});
+            res.status(201).json({menssage: "Criado com sucesso"});
         }catch(err){
             res.status(400);
             console.log(err);
@@ -27,10 +26,11 @@ class TarefasController{
 
     async put(req, res){
         try{
-            const {id} = req.params.id;
+            const {id} = req.query;//O id é a descrição da tarefa
             const {descricao, user_id} = req.body;
-            const response = await tarefas.put(id, {"descricao":descricao, "user_id":user_id});
-            res.status(201).json(response);
+            const response = await tarefas.put(id, {descricao:descricao, user_id:user_id});
+            if(!response['affectedRows']) return res.status(404).json({menssage: "Tarefa não encontrada"});
+            res.status(201).json({menssage: "Alterado com sucesso"});
         }catch(err){
             res.status(400);
             console.log(err);
@@ -39,12 +39,15 @@ class TarefasController{
 
     async delete(req, res){
         try{
-            const {id} = req.params.id;
+            const {id} = req.query;//O id é a descrição da tarefa
             const response = await tarefas.delete(id);
-            res.status(200).json(response);
+            if(!response['affectedRows']) return res.status(404).json({menssage: "Tarefa não encontrada"});
+            res.status(200).json({menssage: "Deletado com sucesso"});
         }catch(err){
             res.status(400);
             console.log(err);
         }
     }
 }
+
+export default new TarefasController();

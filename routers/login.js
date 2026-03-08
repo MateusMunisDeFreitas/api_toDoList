@@ -1,16 +1,9 @@
 import { Router } from "express";
-import jwt from 'jsonwebtoken';
+import usuariosController from "../controller/usuariosController.js";
 
-const router = Router();
+const login = Router();
+const user = usuariosController;
 
-router.get("/login", (req, res)=>{
-    res.send("Page login");
-});
+login.get("/login", user.get_query);
 
-router.post("/login", (req, res)=>{
-    const { nome_user } = req.params;
-    const token = jwt.sign({user: nome_user}, process.env.SECRECT_KEY, {expiresIn: "1h"});
-
-});
-
-export default router;
+export default login;

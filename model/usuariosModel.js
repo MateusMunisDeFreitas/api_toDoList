@@ -10,13 +10,18 @@ class UsuariosModel{
         });
     }
     //Model tabela usuario
-    get(){
-        const sql = `SELECT * FROM usuarios`;
-        return this.execucao(sql);
+    get(id){
+        const sql = `SELECT * FROM usuarios WHERE nome = ?`;
+        return this.execucao(sql, id);//Id é o nome do usuario
+    }
+
+    get_query(params){
+        const sql = `SELECT * FROM usuarios WHERE nome = ? AND senha = ?;`
+        return this.execucao(sql, [params.nome, params.senha]);
     }
 
     post(params){
-        const sql = `INSERT INTO usuarioS SET ?`;
+        const sql = `INSERT INTO usuarios SET ?`;
         return this.execucao(sql, params);
     }
 

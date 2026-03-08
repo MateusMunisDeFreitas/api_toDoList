@@ -27,7 +27,7 @@ class TarefaModel{
     }
 
     delete(descricao){
-        const sql = `DELETE tarefas WHERE descricao = ?`;
+        const sql = `DELETE FROM tarefas WHERE descricao = ?`;
         return this.execucao(sql, descricao);
     }
 }
