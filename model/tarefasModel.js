@@ -15,6 +15,11 @@ class TarefaModel{
         const sql = `SELECT * FROM tarefas;`;
         return this.execucao(sql);
     }
+
+    get_query(params){
+        const sql = `SELECT * FROM tarefas WHERE user_id = ?`;
+        return this.execucao(sql, params);
+    }
     
     post(params){
         const sql = `INSERT INTO tarefas SET ?;`;

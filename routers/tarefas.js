@@ -4,7 +4,9 @@ import tarefasController from "../controller/tarefasController.js";
 
 const tarefas = Router();
 
-tarefas.get('/home/tarefas', authenticator, tarefasController.get);
+// tarefas.get('/home/tarefas', authenticator, tarefasController.get);
+
+tarefas.get('/home/tarefas', authenticator, tarefasController.get_query);
 
 tarefas.post('/home/tarefas', authenticator, tarefasController.post);
 
