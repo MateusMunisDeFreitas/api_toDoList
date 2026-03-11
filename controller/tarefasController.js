@@ -6,6 +6,19 @@ class TarefasController{
     async get(req, res){
         try{
             const response = await tarefas.get();
+            if(!response[0]) return res.status(404).json({menssage:"Não existe tarefas"});
+            res.status(200).json(response);
+        }catch(err){
+            res.status(400);
+            console.log(err);
+        }
+    }
+
+    async get_query(req, res){
+        try{
+            const {id} = req.query;
+            const response = await tarefas.get_query(id);
+            if(!response[0]) return res.status(404).json({menssage:"Não existe tarefas"});
             res.status(200).json(response);
         }catch(err){
             res.status(400);
@@ -20,7 +33,7 @@ class TarefasController{
             res.status(201).json({menssage: "Criado com sucesso"});
         }catch(err){
             res.status(400);
-            console.log(err);
+            console.log("Falha na criacao: ",err);
         }
     }
 

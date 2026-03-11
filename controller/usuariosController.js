@@ -20,7 +20,7 @@ class UsuariosController{
             const response = await user.get_query({nome:nome, senha:senha});
             if(!response[0]) return res.status(404).json({menssage: "Usuario não encontrado"});
             const token = jwt.sign({user: nome}, process.env.SECRET_KEY, {expiresIn: "1h"});
-            res.status(200).json({menssage: token});
+            res.status(200).json({menssage: token, user_id:response[0].id});
         }catch(err){
             res.status(404);
             console.log(err);

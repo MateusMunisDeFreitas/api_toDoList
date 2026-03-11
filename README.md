@@ -47,11 +47,13 @@ npm run dev  # ou npm start
 
 ---
 
-#### 🔑 GET `/login`
+#### 🔑 GET or POST `/login`
 **Descrição**: Autenticar usuário e obter token JWT
 
-**Método**: `GET`  
+**Método**: `GET` ou `POST`  
 **Content-Type**: `application/json`
+
+> É comum enviar credenciais no corpo usando `POST`, mas a rota também aceita `GET`.
 
 **Corpo da Requisição**:
 ```json

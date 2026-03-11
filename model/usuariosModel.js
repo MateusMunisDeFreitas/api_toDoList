@@ -9,9 +9,9 @@ class UsuariosModel{
             });
         });
     }
-    //Model tabela usuario
+    //Model tabela usuario 
     get(id){
-        const sql = `SELECT * FROM usuarios WHERE nome = ?`;
+        const sql = `SELECT * FROM usuarios`;
         return this.execucao(sql, id);//Id é o nome do usuario
     }
 
