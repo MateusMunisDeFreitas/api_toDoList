@@ -27,12 +27,12 @@ class TarefaModel{
     }
     
     put(descricao, params){
-        const sql = `UPDATE tarefas SET ? WHERE descricao = ?`;
+        const sql = `UPDATE tarefas SET ? WHERE id = ?`;
         return this.execucao(sql, [params, descricao]);
     }
 
     delete(descricao){
-        const sql = `DELETE FROM tarefas WHERE descricao = ?`;
+        const sql = `DELETE FROM tarefas WHERE id = ?`;
         return this.execucao(sql, descricao);
     }
 }
