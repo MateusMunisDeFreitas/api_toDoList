@@ -6,13 +6,13 @@ class UsuariosModel{
             conexao.query(sql, params, (err, res)=>{
                 if(err) return reject(err);
                 resolver(res);
-            });
+            }); 
         });
     }
     //Model tabela usuario 
-    get(id){
-        const sql = `SELECT * FROM usuarios`;
-        return this.execucao(sql, id);//Id é o nome do usuario
+    get(nome){
+        const sql = `SELECT * FROM usuarios WHERE nome = ?`;
+        return this.execucao(sql, nome);//Id é o nome do usuario
     }
 
     get_query(params){

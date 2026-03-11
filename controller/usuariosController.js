@@ -11,7 +11,7 @@ class UsuariosController{
         }catch(err){
             res.status(400);
             console.log(err);
-        }
+        } 
     }
     // Rota para Login
     async get_query(req, res){

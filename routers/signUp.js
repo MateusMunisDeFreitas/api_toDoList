@@ -7,4 +7,4 @@ const user = usuariosController;
 
 signUp.post('/singup', user.post);
 
-export default signUp;
+export default signUp; 
