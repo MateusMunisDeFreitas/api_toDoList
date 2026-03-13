@@ -4,7 +4,6 @@ import index from './routers/index.js'
 import tabelas from './dataBase/tabelas.js';
 import cors from 'cors';
 
-//const PORT = 3000;
 dotenv.config();
 const app = express();
 
@@ -17,4 +16,4 @@ app.get('/',(req, res)=>{
     res.send("Helo word");
 })
 
-app.listen(process.env.PORT, ()=>console.log("Servidor rodando PORT ", process.env.PORT));
+app.listen(process.env.PORT,  ()=>console.log("Servidor rodando PORT ", process.env.PORT));
