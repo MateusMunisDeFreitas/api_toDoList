@@ -18,7 +18,7 @@ class UsuariosController{
         try{
             const {nome, senha} = req.body;
             const response = await user.get_query({nome:nome, senha:senha});
-            if(!response[0]) return res.status(404).json({menssage: "Usuario não encontrado"});
+            if(!response[0]) return res.status(404).json({menssage: "Usuário ou senha inválidos"});
             const token = jwt.sign({user: nome}, process.env.SECRET_KEY, {expiresIn: "1h"});
             res.status(200).json({menssage: token, user_id:response[0].id});
         }catch(err){
@@ -31,7 +31,7 @@ class UsuariosController{
         try{
             const {nome, senha} = req.body;
             const response_1 = await user.get(nome);
-            if(response_1[0]) return res.status(401).json({menssage: "Usuario já existe"});
+            if(response_1[0]) return res.status(401).json({menssage: "Usuário já existe"});
 
             const response_2 = await user.post({nome:nome, senha:senha});
             res.status(201).json({menssage: "Criado com sucesso"});
@@ -46,7 +46,7 @@ class UsuariosController{
             const {id} = req.query;
             const {nome, senha} = req.body;
             const response = await user.put(id, {nome:nome, senha:senha});
-            if(!response['affectedRows']) return res.status(404).json({menssage: "Usuario não encontrada"});
+            if(!response['affectedRows']) return res.status(404).json({menssage: "Usuário não encontrada"});
             res.status(201).json({menssage: "Alterado com sucesso"});
         }catch(err){
             res.status(400);
@@ -58,7 +58,7 @@ class UsuariosController{
         try{
             const {id} = req.query;
             const response = await user.delete(id);
-            if(!response['affectedRows']) return res.status(404).json({menssage: "Usuario não encontrada"});
+            if(!response['affectedRows']) return res.status(404).json({menssage: "Usuário não encontrada"});
             res.status(200).json({menssage: "Deletado com sucesso"});
         }catch(err){
             res.status(400);
