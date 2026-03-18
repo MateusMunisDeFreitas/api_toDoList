@@ -1,20 +1,31 @@
-# Use the official Node.js image as the base image
-FROM node:18-alpine
+# Estágio 1: Build
+FROM node:20-alpine AS builder
 
-# Set the working directory inside the container
 WORKDIR /app
 
-# Copy package.json and package-lock.json (if available)
+# Copiar package.json e package-lock.json
 COPY package*.json ./
 
-# Install dependencies
-RUN npm install
+# Instalar dependências
+RUN npm ci --only=production
 
-# Copy the rest of the application code
+# Estágio 2: Runtime
+FROM node:20-alpine
+
+WORKDIR /app
+
+# Copiar as dependências do estágio anterior
+COPY --from=builder /app/node_modules ./node_modules
+
+# Copiar código fonte
 COPY . .
 
-# Expose the port the app runs on (assuming 3000, adjust if needed)
+# Expor porta (ajuste conforme necessário)
 EXPOSE 3000
 
-# Command to run the application
+# Definir variáveis de ambiente padrão
+ENV NODE_ENV=production
+ENV PORT=3000
+
+# Rodar aplicação
 CMD ["node", "app.js"]
