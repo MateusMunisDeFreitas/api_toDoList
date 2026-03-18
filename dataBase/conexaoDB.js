@@ -1,11 +1,11 @@
 import mysql from 'mysql2';
 
 const conexao = mysql.createConnection({
-    host:'localhost',
+    host:'metro.proxy.rlwy.net',/** mysql://root:tWbCrWnGyjcgaATtRqwIzqznGoNTLEcD@metro.proxy.rlwy.net:16945/railway */
     user:'root',
-    password:'B737@320',
-    database:'to_do_list',
-    port:'3306'
+    password:'tWbCrWnGyjcgaATtRqwIzqznGoNTLEcD',
+    database:'railway',
+    port:'16945'
 });
 
 export default conexao;
